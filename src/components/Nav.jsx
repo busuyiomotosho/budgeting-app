@@ -1,26 +1,32 @@
 import { Form, NavLink } from "react-router-dom";
-import logomark from "../assets/logomark.svg";
+import budgetBuddy from "../assets/budget-buddy.svg";
 import { TrashIcon } from "@heroicons/react/24/solid";
 
 const Nav = ({ userName }) => {
   return (
     <nav>
       <NavLink to="/" aria-label="Go to Home">
-        <img src={logomark} alt="" height={30} />
-        <span>HomeBudget</span>
+        <img src={budgetBuddy} alt="" height={30} />
+        <span>
+          <span className="accent">Budget</span>Buddy
+        </span>
       </NavLink>
       {userName && (
         <Form
           method="post"
           action="logout"
           onSubmit={(evt) => {
-            if (!confirm("Delete user and all data?")) {
+            if (
+              !confirm(
+                "Are you sure you want to end this session? All data will be deleted."
+              )
+            ) {
               evt.preventDefault();
             }
           }}
         >
           <button type="submit" className="btn btn--warning">
-            <span>Delete user</span>
+            <span>Delete Session</span>
             <TrashIcon width={20} />
           </button>
         </Form>

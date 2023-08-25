@@ -1,18 +1,17 @@
 import { Form } from "react-router-dom";
+import illustration from "../assets/investing.svg";
+import { Button } from "@mui/material";
+import { PersonAddAltRounded } from "@mui/icons-material";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
-import illustration from "../assets/illustration.jpg";
 
 const Intro = () => {
   return (
     <div className="intro">
       <div>
         <h1>
-          Take control of <span className="accent">Your money</span>
+          Control Your <span className="accent">Finances</span>
         </h1>
-        <p>
-          Personal budgeting is the secret of financial freedom. Start your
-          journey today
-        </p>
+        <p>Budgeting Made Beautifully Simple.</p>
         <Form method="post">
           <input
             type="text"
@@ -29,7 +28,12 @@ const Intro = () => {
           </button>
         </Form>
       </div>
-      <img src={illustration} alt="Person with money" width={600} />
+      <img
+        src={illustration}
+        alt="Person with money"
+        width={600}
+        className="hero"
+      />
     </div>
   );
 };

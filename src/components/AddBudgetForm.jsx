@@ -1,4 +1,6 @@
 import { CurrencyDollarIcon } from "@heroicons/react/24/solid";
+import { Paid } from "@mui/icons-material";
+import { Button } from "@mui/material";
 import { useEffect, useRef } from "react";
 import { Form, useFetcher } from "react-router-dom";
 
@@ -18,7 +20,7 @@ const AddBudgetForm = () => {
 
   return (
     <div className="form-wrapper">
-      <h2 className="h3">Create budget</h2>
+      <h2 className="h3">Create A Budget</h2>
       <fetcher.Form method="post" className="grid-sm" ref={formRef}>
         <div className="grid-xs">
           <label htmlFor="newBudget">Budget Name</label>
@@ -32,13 +34,13 @@ const AddBudgetForm = () => {
           />
         </div>
         <div className="grid-xs">
-          <label htmlFor="newBudgetAmountt">Amount</label>
+          <label htmlFor="newBudgetAmount">Amount</label>
           <input
             type="number"
             step="0.01"
             name="newBudgetAmount"
             id="newBudgetAmount"
-            placeholder="$350"
+            placeholder="₦350"
             required
             inputMode="decimal"
           />

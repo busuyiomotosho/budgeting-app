@@ -16,7 +16,6 @@ const Table = ({ expenses, showBudget = true }) => {
         <tbody>
           {expenses.map((expense) => (
             <tr key={expense.id}>
-              {expense.name}
               <ExpenseItem expense={expense} showBudget={showBudget} />
             </tr>
           ))}
