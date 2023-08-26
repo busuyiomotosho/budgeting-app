@@ -15,7 +15,13 @@ Discover our user-friendly personal budgeting application designed for real-time
 - JavaScript
 - CSS
 
-<img src="https://github.com/busuyiomotosho/todo-app-react/blob/main/screenshots/React%20Todo%20List%202.png" width="100%">
+<img src="https://github.com/busuyiomotosho/budgeting-app/blob/main/screenshots/Budget-Buddy-Home.png" width="100%">
+
+<img src="https://github.com/busuyiomotosho/budgeting-app/blob/main/screenshots/Budget-Buddy-Home-Responsive.png" width="100%">
+
+<img src="https://github.com/busuyiomotosho/budgeting-app/blob/main/screenshots/Budget-Buddy-Dashboard.png" width="100%">
+
+<img src="https://github.com/busuyiomotosho/budgeting-app/blob/main/screenshots/Budget-Buddy-Dashboard-Responsive.png" width="100%">
 
 ## Getting Started
 
