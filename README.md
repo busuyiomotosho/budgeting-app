@@ -15,6 +15,8 @@ Discover our user-friendly personal budgeting application designed for real-time
 - JavaScript
 - CSS
 
+<img src="https://github.com/busuyiomotosho/todo-app-react/blob/main/screenshots/React%20Todo%20List%202.png" width="100%">
+
 ## Getting Started
 
 1. **Clone the Repository**:

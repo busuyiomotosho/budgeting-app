@@ -80,5 +80,5 @@ export const formatCurrency = (amt) => {
 };
 
 export const formatDateToLocaleString = (epoch) => {
-  new Date(epoch).toLocaleDateString();
+  return new Date(epoch).toLocaleDateString();
 };

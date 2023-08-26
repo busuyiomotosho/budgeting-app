@@ -1,8 +1,6 @@
 import { Form } from "react-router-dom";
 import illustration from "../assets/investing.svg";
-import { Button } from "@mui/material";
-import { PersonAddAltRounded } from "@mui/icons-material";
-import { UserPlusIcon } from "@heroicons/react/24/solid";
+import { BanknotesIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 
 const Intro = () => {
   return (
@@ -22,16 +20,16 @@ const Intro = () => {
             autoComplete="given-name"
           />
           <input type="hidden" name="_action" value="newUser" />
-          <button type="submit" className="btn btn--dark">
-            <span>Create account</span>
-            <UserPlusIcon width={20} />
+          <button type="submit" className="btn btn--home">
+            <span>Get Started</span>
+            <BanknotesIcon width={20} />
           </button>
         </Form>
       </div>
       <img
         src={illustration}
         alt="Person with money"
-        width={600}
+        width={500}
         className="hero"
       />
     </div>

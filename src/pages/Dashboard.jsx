@@ -12,6 +12,7 @@ import AddBudgetForm from "../components/AddBudgetForm";
 import AddExpenseForm from "../components/AddExpenseForm";
 import BudgetItem from "../components/BudgetItem";
 import Table from "../components/Table";
+import { ChevronDoubleRightIcon } from "@heroicons/react/24/solid";
 
 export function dashboardLoader() {
   const userName = fetchData("userName");
@@ -91,7 +92,7 @@ const Dashboard = () => {
                   <AddBudgetForm />
                   <AddExpenseForm budgets={budgets} />
                 </div>
-                <h2>Existing budgets</h2>
+                <h2>Existing Budgets</h2>
                 <div className="budgets">
                   {budgets.map((budget) => (
                     <BudgetItem key={budget.id} budget={budget} />
@@ -99,15 +100,16 @@ const Dashboard = () => {
                 </div>
                 {expenses && expenses.length > 0 && (
                   <div className="grid-md">
-                    <h2>Recent expenses</h2>
+                    <h2>Recent Expenses</h2>
                     <Table
                       expenses={expenses
                         .sort((a, b) => b.createdAt - a.createdAt)
                         .slice(0, 8)}
                     />
                     {expenses.length > 8 && (
-                      <Link to="expenses" className="btn btn--dark">
-                        View all expenses
+                      <Link to="expenses" className="btn">
+                        View All Expenses
+                        <ChevronDoubleRightIcon width={20} />
                       </Link>
                     )}
                   </div>
@@ -115,7 +117,7 @@ const Dashboard = () => {
               </div>
             ) : (
               <div className="grid-sm">
-                <p>Personal budgeting is the secret to financial freedom.</p>
+                <p>Unlock Financial Freedom with Smart Budgeting!</p>
                 <p>Create a budget to get started.</p>
                 <AddBudgetForm />
               </div>

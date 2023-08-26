@@ -40,13 +40,13 @@ const AddBudgetForm = () => {
             step="0.01"
             name="newBudgetAmount"
             id="newBudgetAmount"
-            placeholder="₦350"
+            placeholder="NGN 35,000"
             required
             inputMode="decimal"
           />
         </div>
         <input type="hidden" name="_action" value="createBudget" />
-        <button type="submit" className="btn btn--dark" disabled={isSubmitting}>
+        <button type="submit" className="btn" disabled={isSubmitting}>
           {isSubmitting ? (
             <span>Submitting...</span>
           ) : (
