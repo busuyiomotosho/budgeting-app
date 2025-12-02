@@ -1,6 +1,6 @@
 import { redirect } from "react-router-dom";
 import { toast } from "react-toastify";
-import { deleteItem, getAllMatchhingItems } from "../helpers";
+import { deleteItem, getAllMatchingItems } from "../helpers";
 
 const deleteBudget = ({ params }) => {
   try {
@@ -9,7 +9,7 @@ const deleteBudget = ({ params }) => {
       id: params.id,
     });
 
-    const associatedExpenses = getAllMatchhingItems({
+    const associatedExpenses = getAllMatchingItems({
       category: "expenses",
       key: "budgetId",
       value: params.id,
@@ -22,7 +22,7 @@ const deleteBudget = ({ params }) => {
       });
     });
 
-    toast.success("Successful success");
+    toast.success("Budget and associated expenses deleted.");
   } catch (error) {
     throw new Error(error);
   }

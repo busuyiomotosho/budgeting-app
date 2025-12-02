@@ -5,7 +5,8 @@ import Table from "../components/Table";
 import { deleteItem, fetchData } from "../helpers";
 
 export async function expensesLoader() {
-  const expenses = await fetchData("expenses");
+  // fetchData is synchronous and may return null; normalize to []
+  const expenses = fetchData("expenses") ?? [];
 
   return { expenses };
 }

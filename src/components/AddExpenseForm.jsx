@@ -2,7 +2,7 @@ import { useFetcher } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
 
-const AddExpenseForm = ({ budgets }) => {
+const AddExpenseForm = ({ budgets = [] }) => {
   const fetcher = useFetcher();
   const formRef = useRef();
   const focusRef = useRef();
@@ -10,8 +10,8 @@ const AddExpenseForm = ({ budgets }) => {
 
   useEffect(() => {
     if (!isSubmitting) {
-      formRef.current.reset();
-      focusRef.current.focus();
+      formRef.current?.reset();
+      focusRef.current?.focus?.();
     }
   }, [isSubmitting]);
 
@@ -20,7 +20,7 @@ const AddExpenseForm = ({ budgets }) => {
       <h2 className="h3">
         Add new{" "}
         <span className="accent">
-          {budgets.length === 1 && `${budgets.map((el) => el.name)}`}
+          {budgets.length === 1 && budgets[0].name}
         </span>{" "}
         Expense
       </h2>
@@ -64,6 +64,10 @@ const AddExpenseForm = ({ budgets }) => {
               })}
           </select>
         </div>
+        {/* When only one budget is present, submit its id via a hidden input */}
+        {budgets.length === 1 && (
+          <input type="hidden" name="newExpenseBudget" value={budgets[0].id} />
+        )}
         <input type="hidden" name="_action" value="createExpense" />
         <button type="submit" className="btn" disabled={isSubmitting}>
           {isSubmitting ? (

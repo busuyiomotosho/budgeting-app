@@ -10,9 +10,9 @@ const Footer = () => {
         Copyright 2023. Designed by Busuyi Omotosho. All rights reserved.
       </div>
       <div className="social">
-        <FacebookIcon width={15} height={15} className="icon" />
-        <InstagramIcon width={15} height={15} className="icon" />
-        <TwitterIcon width={15} height={15} className="icon" />
+        <FacebookIcon className="icon" sx={{ fontSize: 15 }} />
+        <InstagramIcon className="icon" sx={{ fontSize: 15 }} />
+        <TwitterIcon className="icon" sx={{ fontSize: 15 }} />
       </div>
     </div>
   );

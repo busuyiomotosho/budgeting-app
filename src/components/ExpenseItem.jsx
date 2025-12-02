@@ -1,13 +1,11 @@
-import { formatCurrency, getAllMatchhingItems } from "../helpers";
-import { formatDateToLocaleString } from "../helpers";
-import { Link } from "react-router-dom";
+import { formatCurrency, getAllMatchingItems, formatDateToLocaleString } from "../helpers";
+import { Link, useFetcher } from "react-router-dom";
 import { TrashIcon } from "@heroicons/react/24/solid";
-import { useFetcher } from "react-router-dom";
 
 const ExpenseItem = ({ expense, showBudget }) => {
   const fetcher = useFetcher();
 
-  const budget = getAllMatchhingItems({
+  const budget = getAllMatchingItems({
     category: "budgets",
     key: "id",
     value: expense.budgetId,
@@ -20,12 +18,13 @@ const ExpenseItem = ({ expense, showBudget }) => {
       <td>{formatDateToLocaleString(expense.createdAt)}</td>
       {showBudget && (
         <td>
-          <Link
-            to={`/budget/${budget.id}`}
-            style={{ "--accent": budget.color }}
-          >
-            {budget.name}
-          </Link>
+          {budget ? (
+            <Link to={`/budget/${budget.id}`} style={{ "--accent": budget.color }}>
+              {budget.name}
+            </Link>
+          ) : (
+            <span className="muted">Uncategorized</span>
+          )}
         </td>
       )}
       <td>

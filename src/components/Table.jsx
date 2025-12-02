@@ -6,11 +6,11 @@ const Table = ({ expenses, showBudget = true }) => {
       <table>
         <thead>
           <tr>
-            {["Name", "Amount", "Date", "", showBudget ? "Budget" : ""].map(
-              (i, index) => (
-                <th key={index}>{i}</th>
-              )
-            )}
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Date</th>
+            {showBudget && <th>Budget</th>}
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
