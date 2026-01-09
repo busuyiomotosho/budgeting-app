@@ -6,6 +6,7 @@ const Table = ({ expenses, showBudget = true }) => {
       <table>
         <thead>
           <tr>
+            <th>Done</th>
             <th>Name</th>
             <th>Amount</th>
             <th>Date</th>
@@ -15,7 +16,11 @@ const Table = ({ expenses, showBudget = true }) => {
         </thead>
         <tbody>
           {expenses.map((expense) => (
-            <tr key={expense.id}>
+            <tr
+              key={expense.id}
+              className={expense.checked ? "expense--done" : ""}
+              aria-checked={expense.checked ? "true" : "false"}
+            >
               <ExpenseItem expense={expense} showBudget={showBudget} />
             </tr>
           ))}

@@ -25,6 +25,7 @@ export const deleteItem = ({ key, id }) => {
   const existingData = fetchData(key);
 
   if (id) {
+    // if there's no existing data, nothing to delete
     if (!existingData) return;
     const newData = existingData.filter((item) => item.id !== id);
     return localStorage.setItem(key, JSON.stringify(newData));
@@ -59,6 +60,7 @@ export const createExpense = ({ name, amount, budgetId }) => {
     createdAt: Date.now(),
     amount: +amount,
     budgetId,
+    checked: false, // new: default unchecked
   };
   const existingExpenses = fetchData("expenses") ?? [];
   return localStorage.setItem(
@@ -91,4 +93,19 @@ export const formatCurrency = (amt) => {
 
 export const formatDateToLocaleString = (epoch) => {
   return new Date(epoch).toLocaleDateString();
+};
+
+// new helper: updateItem -> updates a single item in a localStorage array by id
+export const updateItem = ({ key, id, updates }) => {
+  const existing = fetchData(key) ?? [];
+  // filter out undefined update fields so we don't overwrite with undefined
+  const cleanUpdates = Object.entries(updates || {}).reduce((acc, [k, v]) => {
+    if (v !== undefined) acc[k] = v;
+    return acc;
+  }, {});
+  const updated = existing.map((item) =>
+    item.id === id ? { ...item, ...cleanUpdates } : item
+  );
+  localStorage.setItem(key, JSON.stringify(updated));
+  return updated;
 };

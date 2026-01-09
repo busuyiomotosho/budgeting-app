@@ -1,9 +1,9 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import AddExpenseForm from "../components/AddExpenseForm";
 import BudgetItem from "../components/BudgetItem";
 import Table from "../components/Table";
-import { deleteItem, getAllMatchingItems, createExpense } from "../helpers";
+import { deleteItem, getAllMatchingItems, createExpense, updateItem } from "../helpers";
 
 export async function budgetLoader({ params }) {
   // getAllMatchingItems is synchronous; grab first element safely
@@ -26,9 +26,42 @@ export async function budgetLoader({ params }) {
   return { budget, expenses };
 }
 
-export async function budgetAction({ request }) {
+export async function budgetAction({ request, params }) {
   const data = await request.formData();
   const { _action, ...values } = Object.fromEntries(data);
+
+  if (_action === "editExpense") {
+    try {
+      updateItem({
+        key: "expenses",
+        id: values.expenseId,
+        updates: {
+          name: values.editedExpenseName,
+          amount: +values.editedExpenseAmount,
+          budgetId: values.editedExpenseBudget,
+        },
+      });
+      toast.success("Expense updated!");
+      return redirect(`/budget/${params.id}`);
+    } catch (error) {
+      throw new Error("There was a problem updating your expense.");
+    }
+  }
+
+  if (_action === "toggleExpense") {
+    try {
+      updateItem({
+        key: "expenses",
+        id: values.expenseId,
+        updates: { checked: values.checked === "on" || values.checked === "true" || values.checked === "1" },
+      });
+      // small toast and revalidate
+      toast.success("Expense status updated!");
+      return redirect(`/budget/${params.id}`);
+    } catch (error) {
+      throw new Error("There was a problem toggling your expense.");
+    }
+  }
 
   if (_action === "createExpense") {
     try {
@@ -37,7 +70,8 @@ export async function budgetAction({ request }) {
         amount: values.newExpenseAmount,
         budgetId: values.newExpenseBudget,
       });
-      return toast.success(`Expense ${values.newExpense} is created!`);
+      toast.success(`Expense ${values.newExpense} is created!`);
+      return redirect(`/budget/${params.id}`);
     } catch (error) {
       throw new Error("There was a problem creating your expense.");
     }
@@ -49,7 +83,8 @@ export async function budgetAction({ request }) {
         key: "expenses",
         id: values.expenseId,
       });
-      return toast.success("Expense is deleted!");
+      toast.success("Expense is deleted!");
+      return redirect(`/budget/${params.id}`);
     } catch (error) {
       throw new Error("There was a problem deleting your expense.");
     }

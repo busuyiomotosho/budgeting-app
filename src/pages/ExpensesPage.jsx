@@ -1,8 +1,8 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import Table from "../components/Table";
-import { deleteItem, fetchData } from "../helpers";
+import { deleteItem, fetchData, updateItem } from "../helpers";
 
 export async function expensesLoader() {
   // fetchData is synchronous and may return null; normalize to []
@@ -15,13 +15,46 @@ export async function expensesAction({ request }) {
   const data = await request.formData();
   const { _action, ...values } = Object.fromEntries(data);
 
+  if (_action === "editExpense") {
+    try {
+      updateItem({
+        key: "expenses",
+        id: values.expenseId,
+        updates: {
+          name: values.editedExpenseName,
+          amount: +values.editedExpenseAmount,
+          budgetId: values.editedExpenseBudget,
+        },
+      });
+      toast.success("Expense updated!");
+      return redirect("/expenses");
+    } catch (error) {
+      throw new Error("There was a problem updating your expense.");
+    }
+  }
+
+  if (_action === "toggleExpense") {
+    try {
+      updateItem({
+        key: "expenses",
+        id: values.expenseId,
+        updates: { checked: values.checked === "on" || values.checked === "true" || values.checked === "1" },
+      });
+      toast.success("Expense status updated!");
+      return redirect("/expenses");
+    } catch (error) {
+      throw new Error("There was a problem toggling your expense.");
+    }
+  }
+
   if (_action === "deleteExpense") {
     try {
       deleteItem({
         key: "expenses",
         id: values.expenseId,
       });
-      return toast.success("Expense is deleted!");
+      toast.success("Expense is deleted!");
+      return redirect("/expenses");
     } catch (error) {
       throw new Error("There was a problem deleting your expense.");
     }

@@ -465,6 +465,15 @@ select {
   gap: var(--space-md);
 }
 
+.action-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
 @media screen and (max-width: 725px) {
   .expense-inputs {
     -ms-flex-wrap: wrap;
@@ -657,4 +666,10 @@ table a {
 }
 .icon:active {
   opacity: 0.8;
+}
+
+.expense--done td {
+  text-decoration: line-through;
+  color: hsl(var(--muted));
+  opacity: 0.7;
 }
